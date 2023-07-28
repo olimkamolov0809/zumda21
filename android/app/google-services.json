@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "208629703594",
+    "project_id": "work-app-bb53b",
+    "storage_bucket": "work-app-bb53b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208629703594:android:605614d1c8a45c409481d3",
+        "android_client_info": {
+          "package_name": "com.example.zumda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208629703594-ako9flregqbajmosfdifi3vs6t3062un.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPoagBkSbQVhTG-dLARpnnYS3dNSpekhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208629703594-ako9flregqbajmosfdifi3vs6t3062un.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
