@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:zumda/app/app_colors.dart';
 import 'package:zumda/app/app_images.dart';
 import 'package:zumda/app/app_routes.dart';
 import 'package:zumda/core/utils.dart';
@@ -15,14 +17,35 @@ class SigInPage extends StatefulWidget {
 }
 
 class _SigInPageState extends State<SigInPage> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   bool isLoading = false;
 
+  _submit() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      Get.offNamed(AppRoutes.HOME);
+    }
+  }
+
+  _validatorPassword(String? input) {
+    if (input == null) {
+      return 'Неверные данные.';
+    } else if (input.isEmpty) {
+      return 'Неверные данные.';
+    } else if (input.toString().trim().length <= 6) {
+      return 'Неверные данные.';
+    } else {
+      return null;
+    }
+  }
+
   _doSignInPage() {
-    String email = emailController.text.toString().trim();
-    String password = passwordController.text.toString().trim();
+    String email = _emailController.text.toString().trim();
+    String password = _passwordController.text.toString().trim();
     if (email.isEmpty || password.isEmpty) return;
 
     setState(() {
@@ -37,18 +60,6 @@ class _SigInPageState extends State<SigInPage> {
       isLoading = false;
     });
   }
-
-  // _callInPage() {
-  //   setState(() {
-  //     Navigator.pushReplacementNamed(context, SignUpPage.id);
-  //   });
-  // }
-
-  // _homepage() {
-  //   setState(() {
-  //     // Navigator.pushReplacementNamed(context, HomePage2.id);
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +77,27 @@ class _SigInPageState extends State<SigInPage> {
                     left: SizeConfig.calculateBlockHorizontal(300),
                     right: SizeConfig.calculateBlockHorizontal(10),
                     top: SizeConfig.calculateBlockVertical(70)),
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: const Color.fromRGBO(255, 218, 213, 1),
-                  boxShadow: const [
-                    //BoxShadow(color: Colors.black12,offset: Offset(2.0, 2.0)),
+                width: 56,
+                height: 56,
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: const Color(0xFFFFDAD5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  shadows: const [
                     BoxShadow(
-                        color: Colors.black12, offset: Offset(-2.0, -2.0)),
+                      color: Color(0x4C000000),
+                      blurRadius: 3,
+                      offset: Offset(0, 1),
+                      spreadRadius: 0,
+                    ),
+                    BoxShadow(
+                      color: Color(0x26000000),
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                      spreadRadius: 3,
+                    )
                   ],
                 ),
                 child: GestureDetector(
@@ -89,128 +112,117 @@ class _SigInPageState extends State<SigInPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 60),
-              Container(
-                margin: const EdgeInsets.only(left: 60, right: 60),
-                child: Image.asset(AppImages.TIME),
+              const Gap(57.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    AppImages.TIME,
+                    width: 280.0,
+                    height: 140.0,
+                  ),
+                ],
               ),
-              const SizedBox(height: 60),
-              Container(
-                padding: EdgeInsets.only(
-                    left: SizeConfig.calculateBlockHorizontal(35)),
-                child: Text(
-                  'Логин',
-                  style: TextStyle(fontSize: SizeConfig.calculateTextSize(16)),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                    left: SizeConfig.calculateBlockHorizontal(20),
-                    right: SizeConfig.calculateBlockHorizontal(20)),
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromRGBO(255, 218, 213, 1),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              controller: emailController,
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 20),
-                              decoration: const InputDecoration(
-                                hintText: 'Email',
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
-                                    fontSize: 20, color: Colors.black26),
+              const Gap(60.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: _emailController,
+                          validator: (input) =>
+                              input!.trim().isEmpty ? 'Неверные данные.' : null,
+                          style: TextStyle(
+                            color: AppColors.BLACK,
+                            fontSize: SizeConfig.calculateTextSize(16),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: AppColors.ANTIQUEWHITE,
+                            focusColor: AppColors.BLACK,
+                            hintText: '+998 93 286 54 63',
+                            labelText: 'Логин',
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.black,
                               ),
+                              onPressed: () => _emailController.text = '',
+                            ),
+                            labelStyle: TextStyle(
+                              color: AppColors.BLACK,
+                              fontSize: SizeConfig.calculateTextSize(16),
+                              fontWeight: FontWeight.w400,
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: SizeConfig.calculateTextSize(16),
+                              fontWeight: FontWeight.w400,
+                              height: 1.50,
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.BLACK, width: 2),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 50),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.cancel_outlined),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 35),
-                child: const Text(
-                  'Неверные данные.',
-                  style: TextStyle(fontSize: 14, color: Colors.black38),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 35),
-                child: const Text(
-                  'Пароль',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromRGBO(255, 218, 213, 1),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              controller: passwordController,
-                              obscureText: true,
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 20),
-                              decoration: const InputDecoration(
-                                hintText: '***********',
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
-                                    fontSize: 20, color: Colors.black26),
+                        ),
+                        const Gap(40),
+                        TextFormField(
+                          controller: _passwordController,
+                          validator: (input) => _validatorPassword(input),
+                          obscureText: true,
+                          style: TextStyle(
+                            color: AppColors.BLACK,
+                            fontSize: SizeConfig.calculateTextSize(16),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: AppColors.ANTIQUEWHITE,
+                            labelText: 'Пароль',
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.black,
+                              ),
+                              onPressed: () => _emailController.text = '',
+                            ),
+                            labelStyle: TextStyle(
+                              color: AppColors.BLACK,
+                              fontSize: SizeConfig.calculateTextSize(16),
+                              fontWeight: FontWeight.w400,
+                            ),
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: SizeConfig.calculateTextSize(16),
+                              fontWeight: FontWeight.w400,
+                              height: 1.50,
+                            ),
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                                width: 2.0,
                               ),
                             ),
+                            focusedBorder: const UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: AppColors.BLACK, width: 2),
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 50),
-                    const Expanded(
-                      flex: 1,
-                      child: Icon(Icons.cancel_outlined),
-                    ),
-                  ],
-                ),
+                        )
+                      ],
+                    )),
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 35),
-                child: const Text(
-                  'Неверные данные.',
-                  style: TextStyle(fontSize: 14, color: Colors.black38),
-                ),
-              ),
-              const SizedBox(height: 30),
+              const Gap(60),
               GestureDetector(
-                onTap: () {
-                  _doSignInPage();
-                },
+                onTap: _submit,
                 child: Container(
                   margin: const EdgeInsets.only(left: 150, right: 150),
                   height: 40,
