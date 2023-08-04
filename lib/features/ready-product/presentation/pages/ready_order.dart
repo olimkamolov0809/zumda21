@@ -1,41 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:zumda/pages/%D0%A2%D0%B5%D0%BA%D1%83%D1%89%D0%B8%D0%B5_page.dart';
-import 'package:zumda/pages/user_page.dart';
-class GatovPage extends StatefulWidget {
-  static final String id = 'gatov_page';
-  const GatovPage({Key? key}) : super(key: key);
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:zumda/app/app_routes.dart';
+
+class ReadyOrder extends StatefulWidget {
+  static const String id = 'gatov_page';
+  const ReadyOrder({Key? key}) : super(key: key);
 
   @override
-  State<GatovPage> createState() => _GatovPageState();
+  State<ReadyOrder> createState() => _ReadyOrderState();
 }
 
-class _GatovPageState extends State<GatovPage> {
-
-  _outpage(){
+class _ReadyOrderState extends State<ReadyOrder> {
+  _outpage() {
     setState(() {
-      Navigator.pushReplacementNamed(context, HozergiPage.id);
+      // Navigator.pushReplacementNamed(context, HozergiPage.id);
     });
   }
 
-  void _showDialog(){
+  void _showDialog() {
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Column(
+            title: const Column(
               children: [
-                Icon(Icons.delete_outline,size: 25),
-                SizedBox(height: 15,),
+                Icon(Icons.delete_outline, size: 25),
+                SizedBox(
+                  height: 15,
+                ),
                 Text('Вы уверены?'),
               ],
             ),
-            content:Text('Действие будет необратимо.',style: TextStyle(fontSize: 17),),
+            content: const Text(
+              'Действие будет необратимо.',
+              style: TextStyle(fontSize: 17),
+            ),
             actions: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   MaterialButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     child: Container(
                       width: 70,
                       height: 40,
@@ -43,22 +49,25 @@ class _GatovPageState extends State<GatovPage> {
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.red,
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text('Да'),
                       ),
                     ),
                   ),
                   MaterialButton(
-                    onPressed: (){},
+                    onPressed: () {},
                     child: Container(
                       width: 70,
                       height: 40,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 1,color: Colors.black26),
+                        border: Border.all(width: 1, color: Colors.black26),
                       ),
-                      child: Center(
-                        child: Text('Нет',style: TextStyle(color: Colors.red),),
+                      child: const Center(
+                        child: Text(
+                          'Нет',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     ),
                   ),
@@ -66,13 +75,12 @@ class _GatovPageState extends State<GatovPage> {
               ),
             ],
           );
-        }
-    );
+        });
   }
 
-  _userPageTap(){
+  _userPageTap() {
     setState(() {
-      Navigator.pushReplacementNamed(context, UserPage.id);
+      Get.offNamed(AppRoutes.USER);
     });
   }
 
@@ -84,21 +92,22 @@ class _GatovPageState extends State<GatovPage> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(left: 20,right: 20,top:40),
+              margin: const EdgeInsets.only(left: 20, right: 20, top: 40),
               height: 50,
               //color: Colors.grey,
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       _outpage();
                     },
-                    child: Icon(Icons.arrow_back_rounded,size: 20,color: Colors.black),
+                    child: const Icon(Icons.arrow_back_rounded,
+                        size: 20, color: Colors.black),
                   ),
-                  Text(' Текущие',style: TextStyle(fontSize: 24)),
-                  SizedBox(width: 180),
+                  const Text(' Текущие', style: TextStyle(fontSize: 24)),
+                  const SizedBox(width: 180),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       _userPageTap();
                     },
                     child: Container(
@@ -106,29 +115,28 @@ class _GatovPageState extends State<GatovPage> {
                       height: 35,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(35),
-                          color: Colors.black
-                      ),
-                      child: Image(
+                          color: Colors.black),
+                      child: const Image(
                         image: AssetImage('assets/images/img_4.png'),
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              margin: EdgeInsets.only(left: 20,right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               height: 520,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 1,color: Colors.black45),
-                color: Color.fromRGBO(255, 248, 246, 1),
+                border: Border.all(width: 1, color: Colors.black45),
+                color: const Color.fromRGBO(255, 248, 246, 1),
               ),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     //padding: EdgeInsets.only(left: 15,right: 15,top: 15),
                     //margin: EdgeInsets.only(left: 15,right: 15,top: 15),
                     height: 70,
@@ -138,27 +146,38 @@ class _GatovPageState extends State<GatovPage> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 15,right: 15),
+                            margin: const EdgeInsets.only(left: 15, right: 15),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.red[900],
                             ),
-                            child: Center(
-                              child: Icon(Icons.home_outlined,color: Colors.white),
+                            child: const Center(
+                              child: Icon(Icons.home_outlined,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Заказ №23',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                                Text("Улица Ислам Каримова, 38/12",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                                Text(
+                                  'Заказ №23',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  "Улица Ислам Каримова, 38/12",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ],
                             ),
                           ),
@@ -166,7 +185,7 @@ class _GatovPageState extends State<GatovPage> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -174,21 +193,25 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,right: 20,top: 10),
-                            child: Text('1)Плов Чайханский с бараниной'),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
+                            child: const Text('1)Плов Чайханский с бараниной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('1 шт.: 30 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('1 контейнер(-а): 2 000'),
                                 SizedBox(height: 5),
-                                Text('=34 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=34 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -197,12 +220,12 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 120,right: 120),
+                    margin: const EdgeInsets.only(left: 120, right: 120),
                     height: 1,
                     color: Colors.black,
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -210,21 +233,24 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,top: 10),
-                            child: Text('2)Манты с говядиной'),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text('2)Манты с говядиной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('8 шт.: 56 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('2 контейнер(-а): 4 000'),
                                 SizedBox(height: 5),
-                                Text('=62 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=62 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -233,58 +259,80 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 100,),
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 100,
+                    ),
                     height: 60,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Пожелание клиента',style: TextStyle(fontWeight: FontWeight.w700),),
+                        Text(
+                          'Пожелание клиента',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                         Text('Не добавляйте соусы. Спасибо.')
                       ],
                     ),
                   ),
                   Container(
-                    padding:EdgeInsets.only(left: 10,right: 110),
-                    child: Image(
+                    padding: const EdgeInsets.only(left: 10, right: 110),
+                    child: const Image(
                       height: 70,
                       image: AssetImage('assets/images/img_10.png'),
                     ),
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.hourglass_top,size: 18,color: Colors.black26,),
-                      Text('  В процессе...   ',style: TextStyle(fontSize: 18,color: Colors.black26),),
+                      Icon(
+                        Icons.hourglass_top,
+                        size: 18,
+                        color: Colors.black26,
+                      ),
+                      Text(
+                        '  В процессе...   ',
+                        style: TextStyle(fontSize: 18, color: Colors.black26),
+                      ),
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5,bottom: 5,),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                    ),
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20,right: 0),
-                          child: Text('23.01.2023 15:11'),
+                          padding: const EdgeInsets.only(left: 20, right: 0),
+                          child: const Text('23.01.2023 15:11'),
                         ),
-                        SizedBox(width: 15,),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         Container(
                           height: 40,
                           width: 90,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(width: 1,color: Colors.grey),
+                            border: Border.all(width: 1, color: Colors.grey),
                             //color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Отмена',style: TextStyle(color: Colors.red,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Отмена',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Container(
                           height: 40,
                           width: 90,
@@ -293,11 +341,15 @@ class _GatovPageState extends State<GatovPage> {
                             color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Готово',style: TextStyle(color: Colors.white,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Готово',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
@@ -308,18 +360,18 @@ class _GatovPageState extends State<GatovPage> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
-              margin: EdgeInsets.only(left: 20,right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               height: 520,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 1,color: Colors.black45),
-                color: Color.fromRGBO(255, 248, 246, 1),
+                border: Border.all(width: 1, color: Colors.black45),
+                color: const Color.fromRGBO(255, 248, 246, 1),
               ),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     //padding: EdgeInsets.only(left: 15,right: 15,top: 15),
                     //margin: EdgeInsets.only(left: 15,right: 15,top: 15),
                     height: 70,
@@ -329,27 +381,38 @@ class _GatovPageState extends State<GatovPage> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 15,right: 15),
+                            margin: const EdgeInsets.only(left: 15, right: 15),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.red[900],
                             ),
-                            child: Center(
-                              child: Icon(Icons.home_outlined,color: Colors.white),
+                            child: const Center(
+                              child: Icon(Icons.home_outlined,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Заказ №33',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                                Text("Улица Ислам Каримова, 38/12",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                                Text(
+                                  'Заказ №33',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  "Улица Ислам Каримова, 38/12",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ],
                             ),
                           ),
@@ -357,7 +420,7 @@ class _GatovPageState extends State<GatovPage> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -365,21 +428,25 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,right: 20,top: 10),
-                            child: Text('1)Плов Чайханский с бараниной'),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
+                            child: const Text('1)Плов Чайханский с бараниной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('1 шт.: 30 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('1 контейнер(-а): 2 000'),
                                 SizedBox(height: 5),
-                                Text('=34 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=34 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -388,12 +455,12 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 120,right: 120),
+                    margin: const EdgeInsets.only(left: 120, right: 120),
                     height: 1,
                     color: Colors.black,
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -401,21 +468,24 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,top: 10),
-                            child: Text('2)Манты с говядиной'),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text('2)Манты с говядиной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('8 шт.: 56 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('2 контейнер(-а): 4 000'),
                                 SizedBox(height: 5),
-                                Text('=62 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=62 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -424,58 +494,80 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 100,),
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 100,
+                    ),
                     height: 60,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Пожелание клиента',style: TextStyle(fontWeight: FontWeight.w700),),
+                        Text(
+                          'Пожелание клиента',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                         Text('Не добавляйте соусы. Спасибо.')
                       ],
                     ),
                   ),
                   Container(
-                    padding:EdgeInsets.only(left: 10,right: 110),
-                    child: Image(
+                    padding: const EdgeInsets.only(left: 10, right: 110),
+                    child: const Image(
                       height: 70,
                       image: AssetImage('assets/images/img_10.png'),
                     ),
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.hourglass_top,size: 18,color: Colors.black26,),
-                      Text('  В процессе...   ',style: TextStyle(fontSize: 18,color: Colors.black26),),
+                      Icon(
+                        Icons.hourglass_top,
+                        size: 18,
+                        color: Colors.black26,
+                      ),
+                      Text(
+                        '  В процессе...   ',
+                        style: TextStyle(fontSize: 18, color: Colors.black26),
+                      ),
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5,bottom: 5,),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                    ),
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20,right: 0),
-                          child: Text('23.01.2023 15:11'),
+                          padding: const EdgeInsets.only(left: 20, right: 0),
+                          child: const Text('23.01.2023 15:11'),
                         ),
-                        SizedBox(width: 15,),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         Container(
                           height: 40,
                           width: 90,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(width: 1,color: Colors.grey),
+                            border: Border.all(width: 1, color: Colors.grey),
                             //color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Отмена',style: TextStyle(color: Colors.red,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Отмена',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Container(
                           height: 40,
                           width: 90,
@@ -484,11 +576,15 @@ class _GatovPageState extends State<GatovPage> {
                             color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Готово',style: TextStyle(color: Colors.white,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Готово',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
@@ -499,18 +595,18 @@ class _GatovPageState extends State<GatovPage> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
-              margin: EdgeInsets.only(left: 20,right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               height: 520,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 1,color: Colors.black45),
-                color: Color.fromRGBO(255, 248, 246, 1),
+                border: Border.all(width: 1, color: Colors.black45),
+                color: const Color.fromRGBO(255, 248, 246, 1),
               ),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     //padding: EdgeInsets.only(left: 15,right: 15,top: 15),
                     //margin: EdgeInsets.only(left: 15,right: 15,top: 15),
                     height: 70,
@@ -520,27 +616,38 @@ class _GatovPageState extends State<GatovPage> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 15,right: 15),
+                            margin: const EdgeInsets.only(left: 15, right: 15),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.red[900],
                             ),
-                            child: Center(
-                              child: Icon(Icons.home_outlined,color: Colors.white),
+                            child: const Center(
+                              child: Icon(Icons.home_outlined,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Заказ №23',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                                Text("Улица Ислам Каримова, 38/12",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                                Text(
+                                  'Заказ №23',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  "Улица Ислам Каримова, 38/12",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ],
                             ),
                           ),
@@ -548,7 +655,7 @@ class _GatovPageState extends State<GatovPage> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -556,21 +663,25 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,right: 20,top: 10),
-                            child: Text('1)Плов Чайханский с бараниной'),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
+                            child: const Text('1)Плов Чайханский с бараниной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('1 шт.: 30 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('1 контейнер(-а): 2 000'),
                                 SizedBox(height: 5),
-                                Text('=34 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=34 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -579,12 +690,12 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 120,right: 120),
+                    margin: const EdgeInsets.only(left: 120, right: 120),
                     height: 1,
                     color: Colors.black,
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -592,21 +703,24 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,top: 10),
-                            child: Text('2)Манты с говядиной'),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text('2)Манты с говядиной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('8 шт.: 56 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('2 контейнер(-а): 4 000'),
                                 SizedBox(height: 5),
-                                Text('=62 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=62 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -615,58 +729,80 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 100,),
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 100,
+                    ),
                     height: 60,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Пожелание клиента',style: TextStyle(fontWeight: FontWeight.w700),),
+                        Text(
+                          'Пожелание клиента',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                         Text('Не добавляйте соусы. Спасибо.')
                       ],
                     ),
                   ),
                   Container(
-                    padding:EdgeInsets.only(left: 10,right: 110),
-                    child: Image(
+                    padding: const EdgeInsets.only(left: 10, right: 110),
+                    child: const Image(
                       height: 70,
                       image: AssetImage('assets/images/img_10.png'),
                     ),
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.hourglass_top,size: 18,color: Colors.black26,),
-                      Text('  В процессе...   ',style: TextStyle(fontSize: 18,color: Colors.black26),),
+                      Icon(
+                        Icons.hourglass_top,
+                        size: 18,
+                        color: Colors.black26,
+                      ),
+                      Text(
+                        '  В процессе...   ',
+                        style: TextStyle(fontSize: 18, color: Colors.black26),
+                      ),
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5,bottom: 5,),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                    ),
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20,right: 0),
-                          child: Text('23.01.2023 15:11'),
+                          padding: const EdgeInsets.only(left: 20, right: 0),
+                          child: const Text('23.01.2023 15:11'),
                         ),
-                        SizedBox(width: 15,),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         Container(
                           height: 40,
                           width: 90,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(width: 1,color: Colors.grey),
+                            border: Border.all(width: 1, color: Colors.grey),
                             //color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Отмена',style: TextStyle(color: Colors.red,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Отмена',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Container(
                           height: 40,
                           width: 90,
@@ -675,11 +811,15 @@ class _GatovPageState extends State<GatovPage> {
                             color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Готово',style: TextStyle(color: Colors.white,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Готово',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
@@ -690,18 +830,18 @@ class _GatovPageState extends State<GatovPage> {
                 ],
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
-              margin: EdgeInsets.only(left: 20,right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               height: 520,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(width: 1,color: Colors.black45),
-                color: Color.fromRGBO(255, 248, 246, 1),
+                border: Border.all(width: 1, color: Colors.black45),
+                color: const Color.fromRGBO(255, 248, 246, 1),
               ),
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     //padding: EdgeInsets.only(left: 15,right: 15,top: 15),
                     //margin: EdgeInsets.only(left: 15,right: 15,top: 15),
                     height: 70,
@@ -711,27 +851,38 @@ class _GatovPageState extends State<GatovPage> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            margin: EdgeInsets.only(left: 15,right: 15),
+                            margin: const EdgeInsets.only(left: 15, right: 15),
                             width: 40,
                             height: 40,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.red[900],
                             ),
-                            child: Center(
-                              child: Icon(Icons.home_outlined,color: Colors.white),
+                            child: const Center(
+                              child: Icon(Icons.home_outlined,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
                         Expanded(
                           flex: 4,
                           child: Container(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Заказ №23',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700),),
-                                Text("Улица Ислам Каримова, 38/12",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                                Text(
+                                  'Заказ №23',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                Text(
+                                  "Улица Ислам Каримова, 38/12",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               ],
                             ),
                           ),
@@ -739,7 +890,7 @@ class _GatovPageState extends State<GatovPage> {
                       ],
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -747,21 +898,25 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,right: 20,top: 10),
-                            child: Text('1)Плов Чайханский с бараниной'),
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
+                            child: const Text('1)Плов Чайханский с бараниной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('1 шт.: 30 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('1 контейнер(-а): 2 000'),
                                 SizedBox(height: 5),
-                                Text('=34 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=34 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -770,12 +925,12 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 120,right: 120),
+                    margin: const EdgeInsets.only(left: 120, right: 120),
                     height: 1,
                     color: Colors.black,
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     height: 110,
                     //color: Colors.grey,
                     child: Row(
@@ -783,21 +938,24 @@ class _GatovPageState extends State<GatovPage> {
                       children: [
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(left: 20,top: 10),
-                            child: Text('2)Манты с говядиной'),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text('2)Манты с говядиной'),
                           ),
                         ),
                         Expanded(
                           child: Container(
-                            padding: EdgeInsets.only(right: 20,top: 10),
-                            child: Column(
+                            padding: const EdgeInsets.only(right: 20, top: 10),
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text('8 шт.: 56 000'),
                                 Text('1 пакет(-а): 2 000'),
                                 Text('2 контейнер(-а): 4 000'),
                                 SizedBox(height: 5),
-                                Text('=62 000 сум',style: TextStyle(fontWeight: FontWeight.w700),),
+                                Text(
+                                  '=62 000 сум',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
                               ],
                             ),
                           ),
@@ -806,60 +964,82 @@ class _GatovPageState extends State<GatovPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, right: 100,),
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 100,
+                    ),
                     height: 60,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Пожелание клиента',style: TextStyle(fontWeight: FontWeight.w700),),
+                        Text(
+                          'Пожелание клиента',
+                          style: TextStyle(fontWeight: FontWeight.w700),
+                        ),
                         Text('Не добавляйте соусы. Спасибо.')
                       ],
                     ),
                   ),
                   Container(
-                    padding:EdgeInsets.only(left: 10,right: 110),
-                    child: Image(
+                    padding: const EdgeInsets.only(left: 10, right: 110),
+                    child: const Image(
                       height: 70,
                       image: AssetImage('assets/images/img_10.png'),
                     ),
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.hourglass_top,size: 18,color: Colors.black26,),
-                      Text('  В процессе...   ',style: TextStyle(fontSize: 18,color: Colors.black26),),
+                      Icon(
+                        Icons.hourglass_top,
+                        size: 18,
+                        color: Colors.black26,
+                      ),
+                      Text(
+                        '  В процессе...   ',
+                        style: TextStyle(fontSize: 18, color: Colors.black26),
+                      ),
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 5,bottom: 5,),
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                    ),
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(left: 20,right: 0),
-                          child: Text('23.01.2023 15:11'),
+                          padding: const EdgeInsets.only(left: 20, right: 0),
+                          child: const Text('23.01.2023 15:11'),
                         ),
-                        SizedBox(width: 15,),
+                        const SizedBox(
+                          width: 15,
+                        ),
                         Container(
                           height: 40,
                           width: 90,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(width: 1,color: Colors.grey),
+                            border: Border.all(width: 1, color: Colors.grey),
                             //color: Colors.red,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _showDialog();
                             },
-                            child: Center(
-                              child: Text('Отмена',style: TextStyle(color: Colors.red,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Отмена',
+                                style:
+                                    TextStyle(color: Colors.red, fontSize: 15),
+                              ),
                             ),
                           ),
                           //decoration: ,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             _showDialog();
                           },
                           child: Container(
@@ -869,8 +1049,12 @@ class _GatovPageState extends State<GatovPage> {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.red,
                             ),
-                            child: Center(
-                              child: Text('Готово',style: TextStyle(color: Colors.white,fontSize: 15),),
+                            child: const Center(
+                              child: Text(
+                                'Готово',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15),
+                              ),
                             ),
                             //decoration: ,
                           ),
@@ -881,7 +1065,7 @@ class _GatovPageState extends State<GatovPage> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
